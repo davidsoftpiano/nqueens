@@ -1,0 +1,18 @@
+version: "3"
+services:
+  db:
+    image: postgres:alpine
+    environment:
+      POSTGRES_PASSWORD: p4ssw0rd
+      POSTGRES_USER: postgres
+      POSTGRES_DB: nqueens
+      PGDATA: /pgdata
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  nqueens-app:
+    build: .
+    depends_on:
+      - db
